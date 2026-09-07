@@ -4,16 +4,21 @@
 
 This static React + TypeScript + Vite site brings together public biodiversity, molecular, taxonomic, literature and conservation sources. It is an exploratory research tool, not an official database or conservation assessment.
 
-## Scope of phase 1
+## Final implementation
 
 - Spanish-first bilingual interface with English switch, persisted in `localStorage`.
-- Routes for Home, Genetics, Distribution, Research, Conservation, Data Explorer, Sources and Methodology.
-- Public GBIF Occurrence API and NCBI E-utilities adapters with timeout, session cache, error states and source links.
-- A reusable Leaflet map for GBIF records.
+- Routes for Home, Species Profile, Genetics, Distribution, Taxonomy, Research, Conservation, Data Explorer, Data Availability, Sources and Methodology.
+- GBIF Occurrence API search for `Catopuma badia` and `Pardofelis badia`, with normalized metadata, coordinate validation, filters, bounded result loading and pagination.
+- NCBI E-utilities `esearch.fcgi`, `esummary.fcgi` and on-demand `efetch.fcgi` adapters for GenBank/Nuccore metadata, features and public sequences, with pagination, rate limiting and accession links.
+- PubMed E-utilities metadata search for related publications.
+- Genetics dashboard metrics, gene/marker extraction, on-demand sequence viewer, clipboard copy and FASTA download.
+- CSV/JSON/FASTA export helpers, central provenance-aware data enrichment and dynamic Data Availability summary.
+- A reusable Leaflet map for validated GBIF records and source-linked popups.
 - Provenance-aware TypeScript records and a GitHub Pages workflow.
+- Session and memory cache, timeout handling, loading/empty/error states and retry buttons.
 - No API keys, private credentials, aggressive scraping or inferred population genetic statistics.
 
-Research, Data Explorer and several source adapters are intentionally marked as pending until their public endpoints and data semantics are verified.
+BOLD has an explicit adapter, but its public endpoints returned `403` Cloudflare or `404` in the checks performed on 2026-09-07. No endpoint was invented and no restriction was bypassed; the UI reports BOLD as unavailable rather than fabricating zero scientific records.
 
 ## Architecture
 
@@ -38,16 +43,28 @@ npm run build
 
 The included `.github/workflows/deploy.yml` installs dependencies, runs lint, tests and build, then publishes `dist` with the official Pages actions. Enable **Settings > Pages > Source: GitHub Actions** in the repository. Vite uses a relative base path, so the workflow works regardless of the repository name.
 
-## Sources and limitations
+## Data Sources
 
-- [GBIF](https://www.gbif.org/): public occurrence records.
-- [NCBI / GenBank](https://www.ncbi.nlm.nih.gov/): public sequence records through E-utilities.
-- [BOLD Systems](https://www.boldsystems.org/): DNA barcodes, planned adapter.
-- [PubMed](https://pubmed.ncbi.nlm.nih.gov/) and [Crossref](https://www.crossref.org/): literature metadata, planned adapters.
+- [GBIF](https://www.gbif.org/), [Occurrence API documentation](https://techdocs.gbif.org/openapi/occurrence#/Searching%20occurrences/searchOccurrences): occurrence metadata and coordinates. No authentication. Results are limited to 100 per client query and cached in memory/session storage.
+- [NCBI / GenBank](https://www.ncbi.nlm.nih.gov/), [E-utilities documentation](https://www.ncbi.nlm.nih.gov/books/NBK25501/): public Nuccore search and summaries. No API key is used; requests are paginated, cached and spaced.
+- [BOLD Systems](https://www.boldsystems.org/): DNA barcodes. A service interface exists in `src/services/bold.ts`, but browser integration is pending endpoint/CORS verification and does not use guessed URLs.
+- [PubMed](https://pubmed.ncbi.nlm.nih.gov/) and [Crossref](https://www.crossref.org/): PubMed metadata is connected through E-utilities; Crossref remains a documented fallback for a later literature enrichment pass.
 - [Dryad](https://datadryad.org/): public research datasets, planned adapter.
-- [Cat Specialist Group](https://www.catsg.org/): conservation context and external links.
+- [Cat Specialist Group](https://www.catsg.org/): conservation context and external links without a private IUCN API dependency.
+
+All returned records preserve `source`, `sourceId`, `retrievedAt`, `originalUrl` and the source scientific name. Source-derived scientific content is not translated.
+
+## Scientific limits
 
 Counts in the interface are only populated from records actually returned by a source. A missing result does not demonstrate species absence. Small sequence collections cannot support population-level diversity claims.
+
+External records can change, contain duplicates, omit coordinates or omit genetic metadata. GBIF coordinates are never geocoded or altered; invalid coordinates are excluded from the map. Counts and filters are derived from observed API responses. Interpretation and unknowns are kept separate from those observations.
+
+## Analysis boundary
+
+The application deliberately does not produce population-genetic inference, phylogenetic trees, haplotypes, FST, AMOVA, demographic estimates or conservation conclusions. It can retrieve and export public sequences for later analysis, but a sequence count is not diversity and an occurrence count is not abundance. BOLD remains externally available only until a public browser-compatible endpoint is verified.
+
+`VITE_NCBI_TOOL` and optional `VITE_NCBI_EMAIL` can be configured for NCBI attribution. No secret is required or stored; the email is intentionally unset by default rather than fabricated.
 
 ## Translations
 

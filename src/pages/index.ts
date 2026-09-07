@@ -1,0 +1,7 @@
+export { DistributionPage } from './DistributionPage'
+export { GeneticsPage } from './GeneticsPage'
+export { DataExplorerPage } from './DataExplorerPage'
+export { TaxonomyPage } from './TaxonomyPage'
+export { ResearchPage } from './ResearchPage'
+export { DataAvailabilityPage } from './DataAvailabilityPage'
+export { SpeciesProfilePage } from './SpeciesProfilePage'

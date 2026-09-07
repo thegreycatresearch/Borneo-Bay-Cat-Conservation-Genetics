@@ -10,5 +10,35 @@ main { min-height: calc(100vh - 132px); } .page { margin: 0 auto; max-width: 124
 .distribution-grid { grid-template-columns: 1.65fr .35fr; margin-top: 20px; } .map-panel { min-height: 470px; padding: 20px; } .map { height: 400px; margin-top: 17px; width: 100%; } .panel-title h2 { font-size: 20px; } .panel-title > span { color: #718078; font-family: Arial, sans-serif; font-size: 10px; } .stats-panel { display: flex; flex-direction: column; gap: 20px; } .stat { border-bottom: 1px solid #c9d5ca; padding-bottom: 20px; } .stat span { color: #718078; display: block; font-family: Arial, sans-serif; font-size: 10px; } .stat strong { display: block; font-size: 38px; font-weight: 400; margin-top: 8px; } .stats-panel .muted { margin-top: auto; }
 .empty-state { align-items: center; border: 1px dashed #bdc9bc; color: #718078; display: flex; flex-direction: column; margin-top: 35px; padding: 80px 20px; text-align: center; } .empty-state h2 { color: #18352b; margin: 20px 0 8px; } .conservation-grid { grid-template-columns: minmax(280px, 620px); } .conservation-card { background: #173d31; color: #e7efe5; min-height: 310px; } .conservation-card svg { color: #e19a65; margin-bottom: 38px; } .conservation-card h2 { max-width: 350px; } .conservation-card p:not(.eyebrow) { color: #b7c6ba; font-family: Arial, sans-serif; font-size: 13px; line-height: 1.7; max-width: 500px; } .conservation-card .button { color: #e7efe5; margin-top: 12px; } .source-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 17px; } .source-card { min-height: 200px; } .source-card h2 { font-size: 23px; margin-top: 28px; } .source-card p { color: #718078; font-family: Arial, sans-serif; font-size: 12px; line-height: 1.6; min-height: 38px; } .source-card a { align-items: center; color: #c45f38; display: flex; font-family: Arial, sans-serif; font-size: 11px; gap: 6px; text-decoration: none; } .method-grid { max-width: 850px; } .method-item { border-top: 1px solid #cad2c8; display: grid; gap: 40px; grid-template-columns: 45px 1fr; padding: 27px 0; } .method-item > span { color: #d2663b; font-family: Arial, sans-serif; font-size: 11px; } .method-item h2 { font-size: 25px; } .method-item p { color: #68766f; font-family: Arial, sans-serif; font-size: 13px; line-height: 1.7; max-width: 650px; }
 footer { border-top: 1px solid #d8d8c9; color: #7d8981; display: flex; font-family: Arial, sans-serif; font-size: 10px; justify-content: space-between; letter-spacing: .5px; padding: 25px clamp(20px, 5vw, 72px); }
+.data-toolbar { flex-wrap: wrap; }
+.filter { display: flex; flex-direction: column; gap: 7px; min-width: 130px; }
+.filter span { color: #718078; font-family: Arial, sans-serif; font-size: 9px; letter-spacing: .7px; text-transform: uppercase; }
+.filter select { background: #f4f0e8; border: 1px solid #bdc9bc; color: #18352b; font-family: Arial, sans-serif; font-size: 11px; min-height: 35px; padding: 0 10px; }
+.species-filter { min-width: 205px; }
+.filter-row { align-items: end; background: #e8eee7; display: flex; flex-wrap: wrap; gap: 12px; margin: 18px 0; padding: 17px; }
+.text-button { background: none; border: 0; color: #b7522b; font-family: Arial, sans-serif; font-size: 11px; padding: 10px 5px; }
+.text-button:disabled { color: #aeb8b0; cursor: not-allowed; }
+.result-count { color: #68766f; font-family: Arial, sans-serif; font-size: 11px; margin: 20px 0 12px; }
+.result-count strong { color: #18352b; font-family: Georgia, serif; font-size: 20px; font-weight: 400; }
+.pagination { align-items: center; display: flex; font-family: Arial, sans-serif; font-size: 11px; gap: 18px; justify-content: center; padding: 22px 0; }
+.explorer-tabs { border-bottom: 1px solid #cbd5ca; display: flex; gap: 22px; margin-bottom: 25px; }
+.explorer-tabs button { background: none; border: 0; border-bottom: 2px solid transparent; color: #718078; font-family: Arial, sans-serif; font-size: 12px; padding: 12px 2px; }
+.explorer-tabs button.active { border-color: #d2663b; color: #18352b; }
+.explorer-tabs button:disabled { color: #b0b8b1; cursor: not-allowed; }
+.explorer-panel { min-width: 0; }
+.explorer-panel .distribution-grid { margin-top: 20px; }
+.genetics-metrics { grid-template-columns: repeat(5, 1fr); margin: 20px 0 35px; }
+.genetics-metrics .metric { min-height: 125px; }
+.genetics-metrics .metric strong { font-size: 30px; }
+.icon-button { align-items: center; background: none; border: 1px solid #bdc9bc; color: #b7522b; display: inline-flex; justify-content: center; padding: 7px; }
+.sequence-panel { margin-top: 25px; }
+.sequence-text { background: #173d31; color: #dfeadd; font-family: 'Courier New', monospace; font-size: 11px; line-height: 1.6; max-height: 280px; overflow: auto; padding: 18px; white-space: pre-wrap; word-break: break-all; }
+.literature-list { display: grid; gap: 15px; max-width: 900px; }
+.literature-card { display: grid; gap: 9px; }
+.literature-card h2 { font-size: 22px; margin: 0; }
+.literature-card a { color: #b7522b; font-family: Arial, sans-serif; font-size: 11px; }
+.availability-grid { grid-template-columns: repeat(3, 1fr); margin: 35px 0; }
+.profile-grid { display: grid; gap: 18px; grid-template-columns: 1fr 1fr; max-width: 900px; }
+.profile-grid .panel { min-height: 260px; }
 @media (max-width: 900px) { .nav { gap: 10px; } .nav a { font-size: 10px; } .metric-grid { grid-template-columns: repeat(2, 1fr); } .source-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 700px) { .site-header { height: 70px; } .menu-button { display: block; margin-left: auto; } .nav { background: #f4f0e8; border-bottom: 1px solid #d8d8c9; display: none; flex-direction: column; left: 0; padding: 18px 20px; position: absolute; right: 0; top: 70px; } .nav.open { display: flex; } .locale { order: 3; } .hero { grid-template-columns: 1fr; min-height: 0; } .hero-copy { padding: 62px 0 40px; } .hero-species { padding: 40px 0 70px; } .species-ring { height: 170px; width: 170px; } .lower-grid, .distribution-grid, .source-grid { grid-template-columns: 1fr; } .page { padding-bottom: 45px; padding-top: 45px; } .toolbar { align-items: flex-start; flex-direction: column; } h1 { letter-spacing: -2px; } footer { flex-direction: column; gap: 8px; } }
+@media (max-width: 700px) { .site-header { height: 70px; } .menu-button { display: block; margin-left: auto; } .nav { background: #f4f0e8; border-bottom: 1px solid #d8d8c9; display: none; flex-direction: column; left: 0; padding: 18px 20px; position: absolute; right: 0; top: 70px; } .nav.open { display: flex; } .locale { order: 3; } .hero { grid-template-columns: 1fr; min-height: 0; } .hero-copy { padding: 62px 0 40px; } .hero-species { padding: 40px 0 70px; } .species-ring { height: 170px; width: 170px; } .lower-grid, .distribution-grid, .source-grid, .profile-grid { grid-template-columns: 1fr; } .genetics-metrics, .availability-grid { grid-template-columns: repeat(2, 1fr); } .page { padding-bottom: 45px; padding-top: 45px; } .toolbar { align-items: flex-start; flex-direction: column; } h1 { letter-spacing: -2px; } footer { flex-direction: column; gap: 8px; } }
