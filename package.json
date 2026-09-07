@@ -22,9 +22,9 @@
     "@types/leaflet": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
+    "jsdom": "^26.1.0",
     "typescript": "latest",
     "vite": "latest",
-    "vitest": "latest",
-    "jsdom": "latest"
+    "vitest": "latest"
   }
 }
