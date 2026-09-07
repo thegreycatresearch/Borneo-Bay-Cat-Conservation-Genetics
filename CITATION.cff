@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+title: "Borneo Bay Cat Conservation & Genetics"
+type: software
+abstract: "An open research and conservation data explorer for Catopuma badia."
+authors:
+  - family-names: "thegreycatresearch"
+version: 0.1.0
+license: MIT
+repository-code: "https://github.com/thegreycatresearch/Borneo-Bay-Cat-Conservation-Genetics"
