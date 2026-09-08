@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { isValidCoordinate, normalizeOccurrence } from './gbif'
+import { deduplicateOccurrences, isValidCoordinate, normalizeOccurrence } from './gbif'
 
 describe('GBIF adapters', () => {
   it('normalizes occurrence metadata and provenance', () => {
@@ -8,5 +8,10 @@ describe('GBIF adapters', () => {
   })
   it('rejects invalid or missing coordinates', () => {
     expect(isValidCoordinate(91, 110)).toBe(false); expect(isValidCoordinate(1, 181)).toBe(false); expect(normalizeOccurrence({ key: 1, decimalLatitude: 'unknown', decimalLongitude: 2 }).latitude).toBeUndefined()
+  })
+  it('removes duplicate occurrence identifiers', () => {
+    const first = normalizeOccurrence({ key: 42, scientificName: 'Catopuma badia' })
+    const duplicate = normalizeOccurrence({ key: 42, scientificName: 'Pardofelis badia' })
+    expect(deduplicateOccurrences([first, duplicate])).toHaveLength(1)
   })
 })

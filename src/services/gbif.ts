@@ -8,7 +8,12 @@ export async function fetchOccurrences(query: OccurrenceQuery = {}): Promise<Occ
   const offset = Math.max(query.offset || 0, 0)
   const params = new URLSearchParams({ scientificName: query.scientificName || 'Catopuma badia', limit: String(limit), offset: String(offset) })
   const data = await getJson<GbifResponse>(`https://api.gbif.org/v1/occurrence/search?${params}`, 300_000, 250)
-  return { records: data.results.map(normalizeOccurrence), count: data.count, limit, offset }
+  return { records: deduplicateOccurrences(data.results.map(normalizeOccurrence)), count: data.count, limit, offset }
+}
+
+export function deduplicateOccurrences(records: OccurrenceRecord[]): OccurrenceRecord[] {
+  const seen = new Set<string>()
+  return records.filter((record) => { if (seen.has(record.sourceId)) return false; seen.add(record.sourceId); return true })
 }
 
 export function normalizeOccurrence(record: Record<string, unknown>): OccurrenceRecord {

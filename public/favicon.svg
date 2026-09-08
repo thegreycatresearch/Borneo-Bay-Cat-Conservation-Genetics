@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Borneo Bay Cat">
+  <rect width="64" height="64" rx="12" fill="#173d31"/>
+  <path d="M16 21 22 12l8 7c2-1 4-1 6 0l8-7 5 9c2 3 3 7 3 11 0 11-8 19-20 19S12 43 12 32c0-4 1-8 4-11Z" fill="#e19a65"/>
+  <circle cx="27" cy="32" r="2.5" fill="#173d31"/><circle cx="39" cy="32" r="2.5" fill="#173d31"/>
+  <path d="M29 40c2 2 4 2 6 0" fill="none" stroke="#173d31" stroke-width="2" stroke-linecap="round"/>
+</svg>

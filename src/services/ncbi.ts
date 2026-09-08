@@ -13,12 +13,18 @@ export async function fetchGeneticRecords(page = 0, limit = 25, scientificName =
   if (!ids.length) return { records: [], count: Number(search.esearchresult.count), limit: pageSize, offset }
   const summaryParams = ncbiParams(); summaryParams.set('db', 'nuccore'); summaryParams.set('retmode', 'json'); summaryParams.set('id', ids.join(','))
   const summary = await getJson<ESummaryResponse>(`${NCBI_BASE}/esummary.fcgi?${summaryParams}`, 600_000, 350)
-  return { records: ids.map((id) => normalizeGeneticRecord((summary.result[id] as Record<string, unknown> | undefined) || { uid: id })), count: Number(search.esearchresult.count), limit: pageSize, offset }
+  const records = ids.map((id) => normalizeGeneticRecord((summary.result[id] as Record<string, unknown> | undefined) || { uid: id }))
+  return { records: deduplicateGeneticRecords(records), count: Number(search.esearchresult.count), limit: pageSize, offset }
+}
+
+export function deduplicateGeneticRecords(records: GeneticRecord[]): GeneticRecord[] {
+  const seen = new Set<string>()
+  return records.filter((record) => { const key = record.accession || record.sourceId; if (seen.has(key)) return false; seen.add(key); return true })
 }
 
 export function normalizeGeneticRecord(record: Record<string, unknown>): GeneticRecord {
   const accession = String(record.accessionversion || record.caption || record.uid || '')
-  return { source: 'NCBI / GenBank', sourceId: String(record.uid || accession), accession, retrievedAt: new Date().toISOString(), originalUrl: `https://www.ncbi.nlm.nih.gov/nuccore/${accession}`, scientificName: String(record.organism || 'Catopuma badia'), organism: optional(record.organism), molecule: optional(record.moltype || record.biomol), sequenceLength: numberValue(record.slen), collectionDate: optional(record.collectiondate), geographicLocation: optional(record.sublocation || record.country), bioProject: optional(record.projectid), bioSample: optional(record.biosample), database: optional(record.sourcedb), publication: optional(record.title) }
+  return { source: 'NCBI / GenBank', sourceId: String(record.uid || accession), accession, retrievedAt: new Date().toISOString(), originalUrl: `https://www.ncbi.nlm.nih.gov/nuccore/${accession}`, scientificName: String(record.organism || 'Catopuma badia'), organism: optional(record.organism), molecule: optional(record.moltype || record.biomol), marker: optional(record.marker), gene: optional(record.gene), sequenceLength: numberValue(record.slen), collectionDate: optional(record.collectiondate), geographicLocation: optional(record.sublocation || record.country), bioProject: optional(record.projectid), bioSample: optional(record.biosample), database: optional(record.sourcedb), publication: optional(record.title) }
 }
 
 export async function fetchGenBankRecord(accession: string): Promise<{ record: GeneticRecord; genes: GeneRecord[]; sequence: string }> {
