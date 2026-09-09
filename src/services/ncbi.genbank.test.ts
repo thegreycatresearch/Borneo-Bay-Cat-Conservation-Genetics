@@ -17,8 +17,8 @@ ORIGIN
 describe('GenBank parsing', () => {
   it('extracts header, genes and unmodified sequence', () => {
     expect(normalizeGenBankHeader(fixture, 'TEST.1').sequenceLength).toBe(12)
-    expect(parseGenBankGenes(fixture, 'TEST.1').map((gene) => gene.geneName)).toContain('COX1 / COI')
+    expect(parseGenBankGenes(fixture, 'TEST.1').map((gene) => gene.geneName)).toContain('COI')
     expect(parseGenBankSequence(fixture)).toBe('ACGTACGTACGT')
-    expect(normalizeGeneName('control-region')).toBe('Control region')
+    expect(normalizeGeneName('control-region')).toBe('Control region'); expect(normalizeGeneName('NADH dehydrogenase subunit 4L')).toBe('ND4L'); expect(normalizeGeneName('cytochrome b')).toBe('CYTB')
   })
 })

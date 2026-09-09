@@ -124,6 +124,7 @@
     "actions": "Acciones",
     "learnMore": "Más información",
     "pubmedLink": "Ver en PubMed",
+    "openSource": "Abrir fuente original",
     "menu": "Abrir menú",
     "projectLogoAlt": "Logo del proyecto Saving Borneo Cat",
     "navigation": "Navegación principal",
@@ -157,6 +158,7 @@
     "copyFasta": "Copiar FASTA",
     "exportCsv": "Exportar CSV",
     "exportJson": "Exportar JSON",
+    "snapshot": "Guardar snapshot reproducible",
     "warning": "El número de secuencias disponibles no representa diversidad genética poblacional."
   },
   "distribution": {
@@ -261,9 +263,9 @@
     "gbifLimit": "Ventana máxima de 100 ocurrencias por consulta; no representa abundancia.",
     "ncbiLimit": "La búsqueda devuelve registros de secuencias públicos; no diversidad poblacional.",
     "pubmedLimit": "Sólo metadatos bibliográficos públicos.",
-    "boldLimit": "El adaptador no está conectado por restricciones de endpoint/CORS.",
-    "crossrefLimit": "Referencia documentada; no se consulta desde la aplicación.",
-    "dryadLimit": "Referencia documentada; no se consulta desde la aplicación.",
+    "boldLimit": "El proveedor puede bloquear la consulta por Cloudflare/CORS; requiere un proxy autorizado y no se inventan registros.",
+    "crossrefLimit": "Metadatos bibliográficos; no implica acceso al texto completo.",
+    "dryadLimit": "Datasets indexados; el API no envía CORS en navegador y puede requerir un proxy autorizado.",
     "unavailableLimit": "La consulta falló; no se muestra un conteo inventado."
   },
   "conservation": {
@@ -295,8 +297,8 @@
     "ncbi": "Registros de secuencias y metadatos moleculares consultados directamente; no establece diversidad genética poblacional.",
     "bold": "BOLD se documenta como fuente potencial de códigos de barras; no está conectado en esta aplicación.",
     "pubmed": "Metadatos de publicaciones consultados directamente; no implica acceso ni validación del texto completo.",
-    "crossref": "Crossref se reconoce como fuente de metadatos; no se consulta actualmente desde la interfaz.",
-    "dryad": "Dryad se reconoce como repositorio de datasets; no se consulta actualmente desde la interfaz.",
+    "crossref": "Metadatos de publicaciones consultados desde el API público de Crossref.",
+    "dryad": "Datasets consultados desde el API público de Dryad.",
     "iucn": "Contexto de conservación y enlace al Cat Specialist Group/IUCN; no es una copia ni una evaluación oficial.",
     "data": "Qué aporta",
     "notData": "Qué no establece",

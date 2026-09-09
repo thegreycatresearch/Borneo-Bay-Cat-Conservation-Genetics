@@ -11,6 +11,7 @@ This static React + TypeScript + Vite site brings together public biodiversity, 
 - GBIF Occurrence API search for `Catopuma badia` and `Pardofelis badia`, with normalized metadata, coordinate validation, filters, bounded result loading and pagination.
 - NCBI E-utilities `esearch.fcgi`, `esummary.fcgi` and on-demand `efetch.fcgi` adapters for GenBank/Nuccore metadata, features and public sequences, with pagination, rate limiting and accession links.
 - PubMed E-utilities metadata search for related publications.
+- Crossref public metadata search and Dryad public dataset search for related research records.
 - Genetics dashboard metrics, gene/marker extraction, on-demand sequence viewer, clipboard copy and FASTA download.
 - CSV/JSON/FASTA export helpers, central provenance-aware data enrichment and dynamic Data Availability summary.
 - A reusable Leaflet map for validated GBIF records and source-linked popups.
@@ -18,7 +19,7 @@ This static React + TypeScript + Vite site brings together public biodiversity, 
 - Session and memory cache, timeout handling, loading/empty/error states and retry buttons.
 - No API keys, private credentials, aggressive scraping or inferred population genetic statistics.
 
-BOLD has an explicit adapter, but its public endpoints returned `403` Cloudflare or `404` in the checks performed on 2026-09-07. No endpoint was invented and no restriction was bypassed; the UI reports BOLD as unavailable rather than fabricating zero scientific records.
+BOLD has an explicit adapter, but its public endpoints returned `403` Cloudflare or `404` in the checks performed on 2026-09-09. No restriction is bypassed; the UI reports BOLD as unavailable when the provider blocks direct browser access. Dryad's API returned valid JSON but no browser CORS header in the same checks. Authorized server-side proxies can be configured with `VITE_BOLD_PROXY_URL` and `VITE_DRYAD_PROXY_URL` (see `.env.example`).
 
 ## Architecture
 
@@ -47,9 +48,9 @@ The included `.github/workflows/deploy.yml` installs dependencies, runs lint, te
 
 - [GBIF](https://www.gbif.org/), [Occurrence API documentation](https://techdocs.gbif.org/openapi/occurrence#/Searching%20occurrences/searchOccurrences): occurrence metadata and coordinates. No authentication. Results are limited to 100 per client query and cached in memory/session storage.
 - [NCBI / GenBank](https://www.ncbi.nlm.nih.gov/), [E-utilities documentation](https://www.ncbi.nlm.nih.gov/books/NBK25501/): public Nuccore search and summaries. No API key is used; requests are paginated, cached and spaced.
-- [BOLD Systems](https://www.boldsystems.org/): DNA barcodes. A service interface exists in `src/services/bold.ts`, but browser integration is pending endpoint/CORS verification and does not use guessed URLs.
-- [PubMed](https://pubmed.ncbi.nlm.nih.gov/) and [Crossref](https://www.crossref.org/): PubMed metadata is connected through E-utilities; Crossref remains a documented fallback for a later literature enrichment pass.
-- [Dryad](https://datadryad.org/): public research datasets, planned adapter.
+- [BOLD Systems](https://www.boldsystems.org/): DNA barcodes. The adapter attempts the public endpoint; provider-level Cloudflare/CORS blocking may require an authorized proxy configured with `VITE_BOLD_PROXY_URL`.
+- [PubMed](https://pubmed.ncbi.nlm.nih.gov/) and [Crossref](https://www.crossref.org/): public publication metadata connected through E-utilities and the Crossref API.
+- [Dryad](https://datadryad.org/): public research datasets queried through its public API; browser deployment may require `VITE_DRYAD_PROXY_URL` because the provider does not currently return CORS headers.
 - [Cat Specialist Group](https://www.catsg.org/): conservation context and external links without a private IUCN API dependency.
 
 All returned records preserve `source`, `sourceId`, `retrievedAt`, `originalUrl` and the source scientific name. Source-derived scientific content is not translated.

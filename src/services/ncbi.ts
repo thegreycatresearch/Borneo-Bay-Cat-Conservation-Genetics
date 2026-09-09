@@ -14,7 +14,25 @@ export async function fetchGeneticRecords(page = 0, limit = 25, scientificName =
   const summaryParams = ncbiParams(); summaryParams.set('db', 'nuccore'); summaryParams.set('retmode', 'json'); summaryParams.set('id', ids.join(','))
   const summary = await getJson<ESummaryResponse>(`${NCBI_BASE}/esummary.fcgi?${summaryParams}`, 600_000, 350)
   const records = ids.map((id) => normalizeGeneticRecord((summary.result[id] as Record<string, unknown> | undefined) || { uid: id }))
-  return { records: deduplicateGeneticRecords(records), count: Number(search.esearchresult.count), limit: pageSize, offset }
+  const uniqueRecords = deduplicateGeneticRecords(records)
+  try { await enrichGeneticRecordsWithGenes(uniqueRecords) } catch { /* Summary results remain usable when feature retrieval is unavailable. */ }
+  return { records: uniqueRecords, count: Number(search.esearchresult.count), limit: pageSize, offset }
+}
+
+export async function enrichGeneticRecordsWithGenes(records: GeneticRecord[]): Promise<GeneticRecord[]> {
+  const accessions = records.map((record) => record.accession).filter(Boolean)
+  if (!accessions.length) return records
+  const params = ncbiParams(); params.set('db', 'nuccore'); params.set('rettype', 'gb'); params.set('retmode', 'text'); params.set('id', accessions.join(','))
+  const text = await getText(`${NCBI_BASE}/efetch.fcgi?${params}`, 600_000, 350)
+  const genesByAccession = new Map<string, string[]>()
+  for (const block of text.split(/^\/\//m)) {
+    const accession = block.match(/^VERSION\s+(\S+)/m)?.[1] || block.match(/^ACCESSION\s+(\S+)/m)?.[1]
+    if (!accession) continue
+    const genes = [...new Set(parseGenBankGenes(block, accession).map((gene) => gene.geneName))]
+    if (genes.length) genesByAccession.set(accession, genes)
+  }
+  for (const record of records) { const genes = genesByAccession.get(record.accession); if (genes?.length) { record.genes = genes.map((geneName) => ({ geneName, accession: record.accession, source: 'NCBI / GenBank', sourceId: record.sourceId, sourceUrl: record.originalUrl, retrievedAt: record.retrievedAt })); record.gene = genes.join(', ') } }
+  return records
 }
 
 export function deduplicateGeneticRecords(records: GeneticRecord[]): GeneticRecord[] {
@@ -46,7 +64,21 @@ export function parseGenBankGenes(text: string, accession: string): GeneRecord[]
   return records
 }
 
-export function normalizeGeneName(name: string): string { const normalized = name.toLowerCase().replace(/[^a-z0-9]/g, ''); if (['coi', 'co1', 'cox1', 'cytochromecoxidasesubuniti'].includes(normalized)) return 'COX1 / COI'; if (normalized.includes('controlregion')) return 'Control region'; return name }
+export function normalizeGeneName(name: string): string {
+  const normalized = name.toLowerCase().replace(/[^a-z0-9]/g, '')
+  if (['coi', 'co1', 'cox1', 'cytochromecoxidasesubuniti'].includes(normalized)) return 'COI'
+  if (normalized.includes('controlregion')) return 'Control region'
+  const nadh = normalized.match(/nadhdehydrogenasesubunit(\d+l?)/)
+  if (nadh) return `ND${nadh[1].toUpperCase()}`
+  if (normalized.includes('12sribosomalrna')) return '12S rRNA'
+  if (normalized.includes('16sribosomalrna')) return '16S rRNA'
+  if (normalized.includes('cytochromeb')) return 'CYTB'
+  if (normalized.includes('atp synthase') || normalized.includes('atpsynthase')) {
+    const atp = normalized.match(/subunit([68])/)
+    if (atp) return `ATP${atp[1]}`
+  }
+  return name.trim().replace(/\s+/g, ' ')
+}
 export function parseGenBankSequence(text: string): string { const origin = text.split(/^ORIGIN/m)[1]?.split(/^\/\//m)[0] || ''; return origin.replace(/[^a-z]/gi, '').toUpperCase() }
 function optional(value: unknown): string | undefined { return value === undefined || value === null || value === '' ? undefined : String(value) }
 function numberValue(value: unknown): number | undefined { const number = Number(value); return Number.isFinite(number) ? number : undefined }
