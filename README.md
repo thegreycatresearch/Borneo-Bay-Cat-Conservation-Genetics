@@ -1,76 +1,143 @@
-# Borneo Bay Cat Conservation & Genetics
+Borneo Bay Cat Conservation & Genetics
 
-**An open research and conservation data explorer for _Catopuma badia_.**
+An open-source biodiversity and bioinformatics platform focused on the Borneo bay cat (Catopuma badia), one of the world’s least-known felids.
 
-This static React + TypeScript + Vite site brings together public biodiversity, molecular, taxonomic, literature and conservation sources. It is an exploratory research tool, not an official database or conservation assessment.
+The project combines conservation biology, genetics, biodiversity data, scientific literature, taxonomy, and bioinformatics into an interactive web platform designed to make fragmented scientific information easier to explore and understand.
 
-## Final implementation
+Why the Borneo bay cat?
 
-- Spanish-first bilingual interface with English switch, persisted in `localStorage`.
-- Routes for Home, Species Profile, Genetics, Distribution, Taxonomy, Research, Conservation, Data Explorer, Data Availability, Sources and Methodology.
-- GBIF Occurrence API search for `Catopuma badia` and `Pardofelis badia`, with normalized metadata, coordinate validation, filters, bounded result loading and pagination.
-- NCBI E-utilities `esearch.fcgi`, `esummary.fcgi` and on-demand `efetch.fcgi` adapters for GenBank/Nuccore metadata, features and public sequences, with pagination, rate limiting and accession links.
-- PubMed E-utilities metadata search for related publications.
-- Crossref public metadata search and Dryad public dataset search for related research records.
-- Genetics dashboard metrics, gene/marker extraction, on-demand sequence viewer, clipboard copy and FASTA download.
-- CSV/JSON/FASTA export helpers, central provenance-aware data enrichment and dynamic Data Availability summary.
-- A reusable Leaflet map for validated GBIF records and source-linked popups.
-- Provenance-aware TypeScript records and a GitHub Pages workflow.
-- Session and memory cache, timeout handling, loading/empty/error states and retry buttons.
-- No API keys, private credentials, aggressive scraping or inferred population genetic statistics.
+The Borneo bay cat is an elusive wild cat endemic to the island of Borneo. Its rarity and limited scientific information make research and conservation particularly challenging.
 
-BOLD has an explicit adapter, but its public endpoints returned `403` Cloudflare or `404` in the checks performed on 2026-09-09. No restriction is bypassed; the UI reports BOLD as unavailable when the provider blocks direct browser access. Dryad's API returned valid JSON but no browser CORS header in the same checks. Authorized server-side proxies can be configured with `VITE_BOLD_PROXY_URL` and `VITE_DRYAD_PROXY_URL` (see `.env.example`).
+Scientific information about the species can be distributed across biodiversity databases, genetic resources, taxonomic records, occurrence datasets, and scientific publications.
 
-## Architecture
+This project explores how these different sources can be brought together into a single, accessible research-oriented platform.
 
-Reusable UI lives in `src/components`; public API adapters live in `src/services`; data contracts are in `src/types`; translation catalogs are in `src/i18n/es` and `src/i18n/en`; `src/hooks` contains request state handling; route-level views currently live in `src/App.tsx`.
+What we built
 
-## Local development
+The platform provides several interconnected areas for exploring the species:
 
-```bash
+* Species Profile — biological and conservation information about the Borneo bay cat.
+* Taxonomy Explorer — exploration of its taxonomic classification.
+* Genetics — access to available genetic and molecular information.
+* Distribution — exploration of documented geographic occurrences.
+* Data Explorer — interactive exploration of biodiversity data.
+* Research — scientific literature related specifically to the species.
+* Data Availability — overview of available datasets and resources.
+* Methodology — explanation of how information is collected and organized.
+* Sources — traceability to the scientific and biodiversity resources used.
+
+The platform is available in English and Spanish.
+
+Data sources
+
+The project integrates and/or retrieves information from established scientific and biodiversity resources, including:
+
+* NCBI — genetic and molecular data
+* GBIF — biodiversity occurrence data
+* BOLD Systems — DNA barcode information
+* Crossref — scientific publication metadata
+* Dryad — research datasets
+* PubMed / scientific literature resources — research and publications
+* Taxonomic and biodiversity resources
+
+The goal is not to replace these databases, but to connect and contextualize information from them around a single species.
+
+Technology
+
+Built with:
+
+* React
+* TypeScript
+* Vite
+* CSS
+* REST APIs
+* Scientific and biodiversity databases
+* Data processing and exploration workflows
+
+The application is designed as a modular platform so additional datasets, species information, and analytical tools can be incorporated in the future.
+
+Conservation impact
+
+The Borneo bay cat is difficult to study because of its elusive behavior, restricted distribution, and limited available information.
+
+By bringing together biodiversity, genetic, taxonomic, geographic, and scientific information, this project aims to demonstrate how computational tools can support biodiversity research and conservation.
+
+The long-term vision is to develop the platform into a broader framework for data-driven conservation of poorly studied species.
+
+Hackathon
+
+This project was created for NextStep Hacks 2026 — Earth Forward.
+
+Track
+
+Earth Forward — Conservation & Biodiversity
+
+The project addresses biodiversity conservation through the use of computational biology, bioinformatics, and open scientific data.
+
+Future work
+
+Potential future developments include:
+
+* Population genetics analysis as additional sequence data becomes available
+* Expanded genomic datasets
+* Conservation-status monitoring
+* Automated literature discovery
+* Comparative analysis with other Bornean felids
+* Integration of additional biodiversity databases
+* Tools for researchers and conservation organizations
+* Expansion of the platform to other threatened and understudied species
+
+Project structure
+
+src/
+├── pages/
+│   ├── DataAvailabilityPage.tsx
+│   ├── DataExplorerPage.tsx
+│   ├── DistributionPage.tsx
+│   ├── GeneticsPage.tsx
+│   ├── ResearchPage.tsx
+│   ├── SpeciesProfilePage.tsx
+│   └── TaxonomyPage.tsx
+├── App.tsx
+└── styles.css
+
+Getting started
+
+Requirements
+
+* Node.js
+* npm
+
+Installation
+
+Clone the repository:
+
+git clone https://github.com/thegreycatresearch/Borneo-Bay-Cat-Conservation-Genetics.git
+
+Navigate to the project directory:
+
+cd Borneo-Bay-Cat-Conservation-Genetics
+
+Install dependencies:
+
 npm install
+
+Start the development server:
+
 npm run dev
-```
 
-Validation and production build:
+The application will then be available through the local development URL provided by Vite.
 
-```bash
-npm run lint
-npm test
-npm run build
-```
+Live project
 
-## GitHub Pages
+The live application is available here:
 
-The included `.github/workflows/deploy.yml` installs dependencies, runs lint, tests and build, then publishes `dist` with the official Pages actions. Enable **Settings > Pages > Source: GitHub Actions** in the repository. Vite uses a relative base path, so the workflow works regardless of the repository name.
+Borneo Bay Cat Conservation & Genetics
 
-## Data Sources
+https://thegreycatresearch.github.io/Borneo-Bay-Cat-Conservation-Genetics/
 
-- [GBIF](https://www.gbif.org/), [Occurrence API documentation](https://techdocs.gbif.org/openapi/occurrence#/Searching%20occurrences/searchOccurrences): occurrence metadata and coordinates. No authentication. Results are limited to 100 per client query and cached in memory/session storage.
-- [NCBI / GenBank](https://www.ncbi.nlm.nih.gov/), [E-utilities documentation](https://www.ncbi.nlm.nih.gov/books/NBK25501/): public Nuccore search and summaries. No API key is used; requests are paginated, cached and spaced.
-- [BOLD Systems](https://www.boldsystems.org/): DNA barcodes. The adapter attempts the public endpoint; provider-level Cloudflare/CORS blocking may require an authorized proxy configured with `VITE_BOLD_PROXY_URL`.
-- [PubMed](https://pubmed.ncbi.nlm.nih.gov/) and [Crossref](https://www.crossref.org/): public publication metadata connected through E-utilities and the Crossref API.
-- [Dryad](https://datadryad.org/): public research datasets queried through its public API; browser deployment may require `VITE_DRYAD_PROXY_URL` because the provider does not currently return CORS headers.
-- [Cat Specialist Group](https://www.catsg.org/): conservation context and external links without a private IUCN API dependency.
+License
 
-All returned records preserve `source`, `sourceId`, `retrievedAt`, `originalUrl` and the source scientific name. Source-derived scientific content is not translated.
+This project is intended for educational, research, and conservation-oriented purposes.
 
-## Scientific limits
-
-Counts in the interface are only populated from records actually returned by a source. A missing result does not demonstrate species absence. Small sequence collections cannot support population-level diversity claims.
-
-External records can change, contain duplicates, omit coordinates or omit genetic metadata. GBIF coordinates are never geocoded or altered; invalid coordinates are excluded from the map. Counts and filters are derived from observed API responses. Interpretation and unknowns are kept separate from those observations.
-
-## Analysis boundary
-
-The application deliberately does not produce population-genetic inference, phylogenetic trees, haplotypes, FST, AMOVA, demographic estimates or conservation conclusions. It can retrieve and export public sequences for later analysis, but a sequence count is not diversity and an occurrence count is not abundance. BOLD remains externally available only until a public browser-compatible endpoint is verified.
-
-`VITE_NCBI_TOOL` and optional `VITE_NCBI_EMAIL` can be configured for NCBI attribution. No secret is required or stored; the email is intentionally unset by default rather than fabricated.
-
-## Translations
-
-Add or edit a key in both `src/i18n/es/common.json` and `src/i18n/en/common.json`. Keep source-derived scientific content untranslated. Run `npm run lint` and `npm test` after changes.
-
-## Contributing and citation
-
-See [CONTRIBUTING.md](CONTRIBUTING.md), [LICENSE](LICENSE) and [CITATION.cff](CITATION.cff).
+Data remain subject to the licenses and terms of their respective providers.
