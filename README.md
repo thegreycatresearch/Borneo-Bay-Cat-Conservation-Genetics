@@ -1,168 +1,174 @@
 # Borneo Bay Cat Conservation & Genetics
 
-**An open-source biodiversity and bioinformatics platform for the conservation and study of the Borneo bay cat (*Catopuma badia*).**
+**A biodiversity and bioinformatics platform dedicated to the conservation, genetics, taxonomy, distribution, and scientific research of the Borneo bay cat (*Catopuma badia*).**
 
 ---
 
 ## About the Project
 
-The **Borneo Bay Cat Conservation & Genetics** project is an interactive platform dedicated to one of the world's least-known wild felids: the **Borneo bay cat (*Catopuma badia*)**.
+The **Borneo Bay Cat Conservation & Genetics** project was created to explore how technology, biodiversity data, and bioinformatics can support the conservation of one of the world's least-known wild cats.
 
-The project brings together information from **biodiversity databases, genetic resources, taxonomic records, geographic occurrences, and scientific literature** into a single research-oriented platform.
+The Borneo bay cat (*Catopuma badia*) is an endemic felid from the island of Borneo and is considered one of the least-studied wild cats in the world.
 
-Its goal is to demonstrate how **bioinformatics and open scientific data can support biodiversity research and conservation**, particularly for rare and understudied species.
+This project brings together scientific and biodiversity information from multiple open data sources into an interactive platform designed to make that information easier to explore and understand.
 
 ---
 
 ## Why the Borneo Bay Cat?
 
-The Borneo bay cat is a small wild felid **endemic to the island of Borneo**.
+The Borneo bay cat is:
 
-Despite being scientifically recognized for decades, it remains one of the least-studied felids in the world. Its elusive behavior, restricted distribution, and limited observations make studying its ecology, genetics, and population status particularly challenging.
+- Endemic to Borneo.
+- Rarely observed in the wild.
+- Difficult to study because of its elusive behavior.
+- Poorly represented in scientific and biodiversity datasets.
+- Threatened by habitat loss and fragmentation.
 
-Scientific information about the species is also fragmented across multiple databases and research resources.
-
-This project explores how technology can help **connect these scattered sources of information and make them easier to explore**.
+Because so little is known about the species, improving access to existing scientific data can be an important first step toward better research and conservation.
 
 ---
 
 ## What We Built
 
-The platform provides an interconnected set of tools and information pages focused on the Borneo bay cat.
+The platform combines multiple scientific perspectives into one interactive website.
 
 ### Species Profile
 
-Provides an overview of the species, including its biology, distribution, conservation context, and other relevant information.
+An overview of the Borneo bay cat, including its scientific identity, conservation context, and biological information.
 
 ### Taxonomy Explorer
 
-Explores the taxonomic classification of the Borneo bay cat and its position within the Felidae family.
+Explore the species' taxonomic classification and its relationship with other felids.
 
 ### Genetics
 
-Provides access to available genetic and molecular information related to the species.
+A dedicated section for exploring genetic information and genomic resources related to the species.
 
 ### Distribution
 
-Allows users to explore documented geographic occurrences and distribution information.
+Explore biodiversity occurrence information and geographic records to better understand where the species has been documented.
 
 ### Data Explorer
 
-Provides an interface for exploring biodiversity and scientific datasets.
+Interact with biodiversity and scientific datasets collected from external sources.
 
 ### Research
 
-Connects users with scientific publications and research related specifically to the Borneo bay cat.
+Explore scientific literature and research related to the Borneo bay cat.
 
 ### Data Availability
 
-Shows what types of scientific and biodiversity data are currently available and where they originate.
+Provides an overview of the datasets and external scientific resources used by the platform.
 
 ### Methodology
 
-Documents how information is collected, processed, connected, and presented by the platform.
+Explains how information is collected, processed, and presented.
 
 ### Sources
 
-Provides traceability to the scientific databases and external resources used by the project.
+Provides transparency about the scientific databases and resources used throughout the project.
 
 ---
 
 ## Data Sources
 
-The platform connects information from established scientific and biodiversity resources, including:
+The project integrates information from multiple open scientific and biodiversity resources, including:
 
-- **NCBI** — genetic and molecular information
-- **GBIF** — biodiversity occurrence data
-- **BOLD Systems** — DNA barcode data
-- **Crossref** — scientific publication metadata
-- **Dryad** — research datasets
-- **PubMed and scientific literature resources** — scientific publications
-- **Taxonomic and biodiversity resources** — classification and species information
+- **NCBI** — genetic and genomic information.
+- **GBIF** — biodiversity occurrence data.
+- **BOLD Systems** — DNA barcode and specimen-related information.
+- **Crossref** — scientific publication metadata.
+- **Dryad** — scientific datasets.
+- **PubMed** — biomedical and scientific literature.
+- Other taxonomic and biodiversity resources.
 
-The project does **not replace these databases**.
-
-Instead, it uses them as sources and brings their information together around a single species to provide a more accessible research experience.
+The goal is not to replace these databases, but to connect information from them into a more accessible conservation-oriented interface.
 
 ---
 
 ## Technology
 
-The project was built using modern web technologies and scientific data resources.
+The project was developed using:
 
-### Core Technologies
+- React
+- TypeScript
+- Vite
+- CSS
+- REST APIs
+- Scientific and biodiversity databases
+- Bioinformatics resources
+- GitHub Pages
 
-- **React**
-- **TypeScript**
-- **Vite**
-- **CSS**
-- **REST APIs**
-
-### Scientific & Biodiversity Infrastructure
-
-- NCBI
-- GBIF
-- BOLD Systems
-- Crossref
-- Dryad
-- PubMed and scientific literature resources
+The platform retrieves and organizes scientific information from external sources and presents it through an interactive web interface.
 
 ---
 
 ## Conservation Impact
 
-The Borneo bay cat represents a broader challenge in biodiversity conservation:
+Technology alone cannot protect a species, but better access to information can support conservation.
 
-> **How can we study and protect species when the available information is limited and distributed across different scientific resources?**
+This project aims to:
 
-By connecting genetic, taxonomic, geographic, biodiversity, and scientific-literature information, this project demonstrates how computational tools can contribute to the study of poorly known species.
-
-The long-term vision is to develop the concept into a broader framework for **data-driven conservation of rare and understudied wildlife**.
+- Make scientific information about the Borneo bay cat easier to explore.
+- Connect genetic, taxonomic, geographic, and research information.
+- Demonstrate how biodiversity databases can be combined into a single platform.
+- Encourage interest in lesser-known endangered species.
+- Highlight the importance of biodiversity data for conservation research.
+- Provide a foundation for future conservation and bioinformatics tools.
 
 ---
 
 ## Hackathon
 
-This project was developed for:
+This project was developed for **NextStep Hacks 2026** under the **Earth Forward** track.
 
-**NextStep Hacks 2026 — Earth Forward**
+The project combines environmental conservation with technology, biodiversity science, genetics, and bioinformatics to address a real-world conservation challenge.
 
-### Track
+### Earth Forward
 
-**Earth Forward**
+The project focuses on biodiversity conservation by using technology to improve access to scientific knowledge about a threatened and poorly studied species.
 
-The project focuses on:
+---
 
-- Biodiversity conservation
-- Wildlife research
-- Computational biology
-- Bioinformatics
-- Open scientific data
-- Conservation technology
+## Project Goals
+
+The main goals of the project are to:
+
+1. Create a centralized platform for Borneo bay cat information.
+2. Connect biodiversity, taxonomy, genetics, distribution, and research data.
+3. Make scientific information easier to explore.
+4. Demonstrate the potential of bioinformatics in conservation.
+5. Increase awareness of the Borneo bay cat.
+6. Create a foundation that could be expanded into a more advanced conservation research platform.
 
 ---
 
 ## Future Work
 
-Potential future developments include:
+Future versions of the project could include:
 
-- Population genetics analysis as additional sequence data becomes available
-- Expanded genomic datasets
-- Conservation-status monitoring
-- Automated scientific literature discovery
-- Comparative analysis with other Bornean felids
-- Integration of additional biodiversity databases
-- More advanced geographic and occurrence analysis
-- Research tools for conservation organizations
-- Collaboration with wildlife researchers and conservation groups
-- Expansion of the platform to other threatened and understudied species
+- Expanded genomic datasets.
+- Population genetics analysis.
+- Genetic diversity visualization.
+- More detailed geographic distribution analysis.
+- Habitat and environmental data.
+- Conservation status monitoring.
+- Automated literature updates.
+- More biodiversity databases.
+- Comparative genomics with other felid species.
+- Conservation dashboards for researchers and organizations.
+- Integration with additional field observations and camera-trap datasets.
 
 ---
 
 ## Project Structure
 
-```text
+The project is organized as a React + TypeScript application.
+
+\`\`\`text
 src/
+├── App.tsx
+├── styles.css
 ├── pages/
 │   ├── DataAvailabilityPage.tsx
 │   ├── DataExplorerPage.tsx
@@ -171,5 +177,124 @@ src/
 │   ├── ResearchPage.tsx
 │   ├── SpeciesProfilePage.tsx
 │   └── TaxonomyPage.tsx
-├── App.tsx
-└── styles.css
+└── services/
+    ├── BOLD
+    ├── Crossref
+    ├── Dryad
+    ├── GBIF
+    ├── Literature
+    ├── NCBI
+    ├── Taxonomy
+    └── Exports
+\`\`\`
+
+---
+
+## Getting Started
+
+### Requirements
+
+You will need:
+
+- Node.js
+- npm
+- Git
+
+### Clone the repository
+
+\`\`\`bash
+git clone https://github.com/thegreycatresearch/Borneo-Bay-Cat-Conservation-Genetics.git
+\`\`\`
+
+### Enter the project directory
+
+\`\`\`bash
+cd Borneo-Bay-Cat-Conservation-Genetics
+\`\`\`
+
+### Install dependencies
+
+\`\`\`bash
+npm install
+\`\`\`
+
+### Start the development server
+
+\`\`\`bash
+npm run dev
+\`\`\`
+
+The development server will usually be available at:
+
+\`\`\`text
+http://localhost:5173/
+\`\`\`
+
+---
+
+## Live Project
+
+The project is available online through GitHub Pages:
+
+https://thegreycatresearch.github.io/Borneo-Bay-Cat-Conservation-Genetics/
+
+---
+
+## Language Support
+
+The platform supports both:
+
+- English
+- Spanish
+
+This makes the project more accessible to users from different backgrounds while maintaining its scientific focus.
+
+---
+
+## A Broader Vision
+
+The Borneo bay cat is only one example of a much larger problem.
+
+Thousands of species have scientific information distributed across different databases, publications, repositories, and biodiversity platforms.
+
+A future version of this concept could become a broader biodiversity intelligence platform capable of connecting:
+
+**Species → Taxonomy → Genetics → Distribution → Research → Conservation**
+
+The long-term goal is to demonstrate how bioinformatics and web technologies can help transform fragmented scientific information into tools that are easier to explore and potentially useful for conservation.
+
+---
+
+## Acknowledgements
+
+This project makes use of publicly available scientific and biodiversity resources provided by organizations and databases including:
+
+- NCBI
+- GBIF
+- BOLD Systems
+- Crossref
+- Dryad
+- PubMed
+- Other open scientific and biodiversity resources
+
+All external datasets and scientific information remain the property of their respective providers and authors.
+
+---
+
+## License
+
+This project is intended as an educational, scientific, and conservation-oriented project.
+
+Please check the licenses and usage conditions of individual external datasets and APIs before reusing their data.
+
+---
+
+## Built for Earth Forward
+
+Technology can help us understand biodiversity.
+
+Better access to scientific knowledge can help us protect it.
+
+**Borneo Bay Cat Conservation & Genetics** was created to connect those two ideas.
+
+> **Explore the data. Understand the species. Protect biodiversity.**
